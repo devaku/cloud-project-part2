@@ -25,6 +25,8 @@ Deployment
 
 https://learn.microsoft.com/en-us/azure/azure-functions/functions-develop-vs-code?tabs=node-v4%2Cpython-v2%2Cisolated-process%2Cquick-create&pivots=programming-language-python#create-an-azure-functions-project
 
+https://www.youtube.com/watch?v=lpZCwzYVNpA
+
 OR
 
 Run command
