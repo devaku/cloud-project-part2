@@ -1,37 +1,46 @@
 import azure.functions as func
-import datetime
-import json
 import logging
+from dotenv import load_dotenv
+from azure.storage.blob import BlobServiceClient
 import os
 
-ROOT_DIRECTORY = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+load_dotenv()
+
+def fetch_image_from_blob(filename):
+    """Download an image file from Azure Blob Storage."""
+    conn_str = os.environ.get("AZURE_STORAGE_CONNECTION_STRING")
+    container_name = "images"  # Change if your container name is different
+
+    blob_service_client = BlobServiceClient.from_connection_string(conn_str)
+    blob_client = blob_service_client.get_blob_client(container=container_name, blob=filename)
+    blob_data = blob_client.download_blob().readall()
+    return blob_data
 
 def getHeatmap(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Python HTTP trigger function processed a request.')
-
-    file_path = ROOT_DIRECTORY + '/images/heatmap.png'
-    print(file_path)
-
-    with open(file_path, "rb") as f:
-        data = f.read()
-    return func.HttpResponse(data, mimetype="image/png")
+    logging.info('Fetching heatmap.png from Azure Blob Storage')
+    try:
+        data = fetch_image_from_blob("heatmap.png")
+        return func.HttpResponse(data, mimetype="image/png")
+    except Exception as e:
+        logging.error(f"Error fetching heatmap.png: {e}")
+        return func.HttpResponse(f"Error: {e}", status_code=500)
 
 def getBarchart(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Python HTTP trigger function processed a request.')
-
-    file_path = ROOT_DIRECTORY + '/images/barchart.png'
-    print(file_path)
-
-    with open(file_path, "rb") as f:
-        data = f.read()
-    return func.HttpResponse(data, mimetype="image/png")
+    logging.info('Fetching barchart.png from Azure Blob Storage')
+    try:
+        data = fetch_image_from_blob("barchart.png")
+        return func.HttpResponse(data, mimetype="image/png")
+    except Exception as e:
+        logging.error(f"Error fetching barchart.png: {e}")
+        return func.HttpResponse(f"Error: {e}", status_code=500)
 
 def getScatterplot(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Python HTTP trigger function processed a request.')
-
-    file_path = ROOT_DIRECTORY + '/images/scatterplot.png'
-    print(file_path)
-
-    with open(file_path, "rb") as f:
-        data = f.read()
-    return func.HttpResponse(data, mimetype="image/png")
+    logging.info('Fetching scatterplot.png from Azure Blob Storage')
+    try:
+        data = fetch_image_from_blob("scatterplot.png")
+        return func.HttpResponse(data, mimetype="image/png")
+    except Exception as e:
+        logging.error(f"Error fetching scatterplot.png: {e}")
+        return func.HttpResponse(f"Error: {e}", status_code=500)
