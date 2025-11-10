@@ -1,5 +1,5 @@
 import azure.functions as func
-import routes.debug, routes.images
+import routes.debug, routes.images, routes.nutrition
 # import routes.nutrition if needed
 
 app = func.FunctionApp()
@@ -13,4 +13,5 @@ app.route(route="images/barchart", auth_level=func.AuthLevel.ANONYMOUS)(routes.i
 app.route(route="images/scatterplot", auth_level=func.AuthLevel.ANONYMOUS)(routes.images.getScatterplot)
 
 # Uncomment later if you add nutrition again
-# app.route(route="process", auth_level=func.AuthLevel.ANONYMOUS)(routes.nutrition.processNutrition)
+app.route(route="process", auth_level=func.AuthLevel.ANONYMOUS)(routes.nutrition.processNutrition)
+app.route(route="getAll", auth_level=func.AuthLevel.ANONYMOUS)(routes.nutrition.getAllData)
