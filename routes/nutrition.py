@@ -8,7 +8,7 @@ import os
 
 
 def processNutrition(req: func.HttpRequest) -> func.HttpResponse:
-    conn_str = os.environ.get("AZURE_STORAGE_CONNECTION_STRING")
+    conn_str = os.getenv("AzureWebJobsStorage")
     
     blob_service_client = BlobServiceClient.from_connection_string(conn_str)
     container_name = 'datasets'
@@ -31,7 +31,7 @@ def processNutrition(req: func.HttpRequest) -> func.HttpResponse:
     return func.HttpResponse(f"{"Data processed and stored successfully."}")
 
 def getAllData(req: func.HttpRequest) -> func.HttpResponse:
-    conn_str = os.environ.get("AZURE_STORAGE_CONNECTION_STRING")
+    conn_str = os.getenv("AzureWebJobsStorage")
     blob_service_client = BlobServiceClient.from_connection_string(conn_str)
     container_name = 'datasets'
     blob_name = 'All_Diets.csv'

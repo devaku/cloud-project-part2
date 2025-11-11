@@ -10,7 +10,7 @@ load_dotenv()
 
 def fetch_image_from_blob(filename):
     """Download an image file from Azure Blob Storage."""
-    conn_str = os.environ.get("AZURE_STORAGE_CONNECTION_STRING")
+    conn_str = os.getenv("AzureWebJobsStorage")
     container_name = "images"  # Change if your container name is different
 
     blob_service_client = BlobServiceClient.from_connection_string(conn_str)
