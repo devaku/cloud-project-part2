@@ -7,6 +7,8 @@ app = func.FunctionApp()
 # User Auth
 app.route(route="login", auth_level=func.AuthLevel.ANONYMOUS)(routes.database.login)
 app.route(route="logout", auth_level=func.AuthLevel.ANONYMOUS)(routes.database.logout)
+app.route(route="register", auth_level=func.AuthLevel.ANONYMOUS)(routes.database.register)
+app.route(route="verifyLogin", auth_level=func.AuthLevel.ANONYMOUS)(routes.database.verifyLogin)
 
 # Debug routes
 app.route(route="debug", auth_level=func.AuthLevel.ANONYMOUS)(routes.debug.debug)
