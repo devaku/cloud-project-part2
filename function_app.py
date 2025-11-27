@@ -1,8 +1,12 @@
 import azure.functions as func
-import routes.debug, routes.images, routes.nutrition
+import routes.debug, routes.images, routes.nutrition, routes.database
 # import routes.nutrition if needed
 
 app = func.FunctionApp()
+
+# User Auth
+app.route(route="login", auth_level=func.AuthLevel.ANONYMOUS)(routes.database.login)
+app.route(route="logout", auth_level=func.AuthLevel.ANONYMOUS)(routes.database.logout)
 
 # Debug routes
 app.route(route="debug", auth_level=func.AuthLevel.ANONYMOUS)(routes.debug.debug)

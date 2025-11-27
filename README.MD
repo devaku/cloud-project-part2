@@ -12,7 +12,7 @@ docker run -p 10000:10000 -p 10001:10001 mcr.microsoft.com/azure-storage/azurite
 
 # Run the local FUNC (LOL)
 
-func start --port 3000
+func start --port 8080
 ```
 
 Extra reading:

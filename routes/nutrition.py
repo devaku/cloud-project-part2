@@ -5,8 +5,6 @@ import io
 import json
 import os
 
-
-
 def processNutrition(req: func.HttpRequest) -> func.HttpResponse:
     conn_str = os.getenv("AzureWebJobsStorage")
     

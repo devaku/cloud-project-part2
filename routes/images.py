@@ -4,8 +4,6 @@ from dotenv import load_dotenv
 from azure.storage.blob import BlobServiceClient
 import os
 
-
-
 load_dotenv()
 
 def fetch_image_from_blob(filename):
