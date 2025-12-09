@@ -5,8 +5,11 @@ import io
 import json
 import os
 
+# Search recipes by type
+# Search recipes by keyword
+
 def processNutrition(req: func.HttpRequest) -> func.HttpResponse:
-    conn_str = os.getenv("AzureWebJobsStorage")
+    conn_str = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
     
     blob_service_client = BlobServiceClient.from_connection_string(conn_str)
     container_name = 'datasets'
@@ -29,7 +32,7 @@ def processNutrition(req: func.HttpRequest) -> func.HttpResponse:
     return func.HttpResponse(f"{"Data processed and stored successfully."}")
 
 def getAllData(req: func.HttpRequest) -> func.HttpResponse:
-    conn_str = os.getenv("AzureWebJobsStorage")
+    conn_str = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
     blob_service_client = BlobServiceClient.from_connection_string(conn_str)
     container_name = 'datasets'
     blob_name = 'All_Diets.csv'
